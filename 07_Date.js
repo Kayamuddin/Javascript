@@ -8,7 +8,7 @@ let newDate1 = new Date(year-month-date, hour, minute, second)  //put value in n
 
 let newDate2 = new Date(month-date-year, hour, minute, second)  //put value in number
                     // 1-12,  00  ,0000, 00  , 00    ,00              
-
+ 
 // get date and time
 d.getFullYear();     // 2025
 d.getMonth();        // 6 (July, 0-based)
