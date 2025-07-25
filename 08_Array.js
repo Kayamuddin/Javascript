@@ -16,7 +16,7 @@ let empty = []; // Empty array
 fruits[0];        // "apple"
 fruits[1];        // "banana"
 fruits.length;    // 3
-*/
+*/ 
 // Modifying Elements
 let fruits = ['apple', 'banana', 'mango'];
 f=fruits;
