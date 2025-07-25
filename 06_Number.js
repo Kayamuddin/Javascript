@@ -9,7 +9,7 @@ toFixed: ƒ toFixed()
 toLocaleString: ƒ toLocaleString()
 toPrecision: ƒ toPrecision()
 toString: ƒ toString()
-valueOf: ƒ valueOf()
+valueOf: ƒ valueOf() 
 
 | Method                            | Description                                          |
 | --------------------------------- | ---------------------------------------------------- |
