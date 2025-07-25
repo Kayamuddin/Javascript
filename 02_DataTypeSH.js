@@ -6,7 +6,7 @@ let b = a;          // Copy of a (also in stack)
 b = 20;             // Changing b does not affect a
 console.log(a);     // 10
 Reference variable gets its own copy in the stack.
-*/
+*/ 
 /* Heap (Non-Primitive are Heap)
 let obj1 = { name: "Alice" };  // Object is in heap
 let obj2 = obj1;               // Reference copied, both point to same heap object
