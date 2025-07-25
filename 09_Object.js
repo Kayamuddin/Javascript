@@ -4,7 +4,7 @@
 /*
 // Using new Object()
 const car = new Object();    // singleton Object
-car.brand = "Toyota";
+car.brand = "Toyota"; 
 car.model = "Corolla";
 car.year = 2022;
 
