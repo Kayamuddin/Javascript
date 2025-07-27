@@ -1,5 +1,7 @@
 // Using Object Literal
 // We can change object value even the object is const
+// const newObj = {...oldObj};                          // Best way to create copy of Object with new memory space
+
 
 /*
 // Using new Object()
@@ -105,16 +107,31 @@ Object.values(person1)      // [ 'Kayamuddin', 19, [Function: greet] ]
 Object.entries(person1)     // [ [ 'name', 'Kayamuddin' ] ,[ 'age', 19 ] ,[ 'greet', [Function: greet] ] ]  // convert Object to Array
 // Object.freeze(person1)      // Freezes the object (no changes allowed) like add, update, delete
 // person1.name = "Shehzan Khan";  // No Error but value can't change
-/*Object.seal(person1);
+/*
+Object.seal(person1);
 person1.age = 26;          // ✅ Allowed: modifying existing property
 person1.city = "Delhi";    // ❌ Not allowed: adding new property
-delete person1.name;       // ❌ Not allowed: deleting property*/
+delete person1.name;       // ❌ Not allowed: deleting property
+*/
 Object.assign(person1, { city: "mumbai", id: 18 });    // it add city and id in person1
 const obj2 = {email: "k@gmail.com"}
 Object.assign(person1, obj2);     // add data of obj2 to person1 obj
 console.log(person1);             // at this line there is no greeting & greetingTwo function
 
+const obj3 = {1: "obj3", 2: "obj3"}
+const obj4 = {2: "obj4", 3: "obj4"}
+const obj5 = {5: "obj5", 1: "obj5"}
+const obj6 = { obj3, obj4, obj4 }
+const obj7 = Object.assign({}, obj3, obj4, obj5)
+console.log(obj7);     // { '1': 'obj5', '2': 'obj4', '3': 'obj4', '5': 'obj5' }
 
+const obj8 = obj3;                                // it create copy of Object with old memory space
+console.log(obj8==obj3);     // true
+const obj9 = Object.assign({}, obj3);             //  it create copy of Object with new memory space
+console.log(obj9==obj3);     // false
+const obj10 = {...obj3};                          // Best way to create copy of Object with new memory space
+console.log(obj10);
+console.log(obj10==obj3);    // false
 
 
 
@@ -126,6 +143,50 @@ person1.greetingTwo = function(){
 }
 console.log(person1.greeting());   // Hello JS person1
 console.log(person1.greeting);     // [Function (anonymous)]
+
+
+
+// Destructing in Object
+/*
+// Basic Syntax:
+const person = { name: "Kayam", age: 25 };
+const { name, age } = person;
+console.log(name); // "Kayam"
+console.log(age);  // 25
+*/
+/*
+Rename while destructuring:
+const person = { name: "Kayam", age: 25 };
+const { name: fullName, age: years } = person;
+console.log(fullName); // "Kayam"
+console.log(years);    // 25
+*/
+/*
+Default values:
+const person = { name: "Kayam" };
+const { name, age = 30 } = person;
+console.log(age); // 30
+*/
+/*
+Nested object destructuring:
+const user = {
+  id: 101,
+  profile: {
+    username: "kayam",
+    location: "India"
+  }
+};
+const { profile: { username, location } } = user;
+console.log(username); // "kayam"
+console.log(location); // "India"
+*/
+/*
+Rest operator with destructuring:
+const person = { name: "Kayam", age: 25, country: "India" };
+const { name, ...rest } = person;
+console.log(name); // "Kayam"
+console.log(rest); // { age: 25, country: "India" }
+*/
 
 
 /* "Nested" means one thing is inside another.
