@@ -3,7 +3,7 @@ console.log("Vari"
 
 // Variables
 
-
+ 
 /* Declare
 const NotChangeableAndNotEmpty = 0
 all non-primitive values (like arrays, objects, functions, etc) can have their internal contents changed, 

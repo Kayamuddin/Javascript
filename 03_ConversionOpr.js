@@ -8,7 +8,7 @@ let result6 = null + 1;   // 1   → null is converted to 0
 let result7 = undefined + 1; // NaN → undefined can't be converted to number
 console.log(result1);
 
-// Explicit Conversion
+// Explicit Conversion 
 Number()
 parseInt()
 parseFloat()

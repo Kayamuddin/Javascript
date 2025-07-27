@@ -12,7 +12,7 @@
 
 
 
-// Assignment Operators
+// Assignment Operators 
 | Operator | Description         | Example   | Equivalent To |
 | -------- | ------------------- | --------- | ------------- |
 | `=`      | Assignment          | `x = 10`  |               |

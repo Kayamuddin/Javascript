@@ -7,7 +7,7 @@ console.log(`Hello my name ${name}`);
 
 let strObj = new String("Hello"); // new String() creates a string object, not a primitive string
 typeof strObj; // "object"
-
+ 
 console.log(str.length);        // 13    start from 1
 console.log(str.toUpperCase()); // "HELLO, WORLD!"
 console.log(str.toLowerCase()); // "hello, world!"
