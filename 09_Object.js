@@ -179,7 +179,7 @@ const user = {
 const { profile: { username, location } } = user;
 console.log(username); // "kayam"
 console.log(location); // "India"
-*/
+*/ 
 /*
 Rest operator with destructuring:
 const person = { name: "Kayam", age: 25, country: "India" };
