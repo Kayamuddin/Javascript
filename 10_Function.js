@@ -43,10 +43,6 @@ processUserInput(function (name) {
   console.log("Hello " + name);
 });
 
-// Function Constructor
-const add = new Function("a", "b", "return a + b");
-console.log(add(2, 3)); // 5
-
 
 
 
@@ -221,3 +217,18 @@ function square(n) {
 }
 // Implicit Return : Arrow Functions can return values implicitly if there's no {} block:
 const square = n => n * n; // Implicit return
+
+// Currying Function
+function add(a) {
+  return function (b) {
+    return a + b;
+  };
+}
+console.log(add(2)(3)); // 5
+
+// Function Composition
+const compose = (f, g) => (x) => f(g(x));
+const square = (x) => x * x;
+const double = (x) => x * 2;
+const doubleThenSquare = compose(square, double);
+console.log(doubleThenSquare(3)); // 36
