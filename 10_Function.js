@@ -51,7 +51,7 @@ console.log(add(2, 3)); // 5
 
 
 */
-
+/*
 // ***********ES6+ Functions (Modern JavaScript)*************
 //  Arrow Functions                                // Implicit return (no {} or return) for single expressions
 const add = (a, b) => a + b;
@@ -98,15 +98,7 @@ const sayHi = function() {
   const name = "Kayamuddin"
 };
 console.log(sayHi.name); // "sayHi"             it .name return the name of function
-
-
-
-
-
-
-
-
-
+*/
 
 
 
@@ -120,7 +112,7 @@ console.log(sayHi.name); // "sayHi"             it .name return the name of func
 | Has `arguments` object     | ✅ Yes            | ❌ No           |
 | Hoisted                    | ✅ Yes            | ❌ No           |
 */
-
+/*
 // Return Statement                              // If no return, function returns undefined
 function getName() {
   return "Kayam";
@@ -170,3 +162,62 @@ function returnSecondValue(getArray){
 }
 console.log(returnSecondValue(myNewArray));   // 400
 console.log(returnSecondValue([200, 400, 500, 1000])); // 400
+*/
+
+
+
+
+
+
+
+// Regular vs Arrow Function
+// Hoisting
+console.log(add(2,3));   // 5       // Can access 'add' before initialization
+function add(a, b) { 
+  return a + b;
+}
+// console.log(add1(2,4));          // Cannot access 'add1' before initialization
+const add1 = (a, b) => a + b;
+
+// this Binding
+const obj = {
+  name: "Kayam",
+  regularFn: function () {
+    console.log(this.name); // 'this' refers to obj
+  }
+};
+obj.regularFn(); // Output: Kayam
+const obj1 = {
+  name: "Kayam",
+  arrowFn: () => {
+    console.log(this.name); // 'this' refers to the outer scope, not obj
+  }
+};
+obj1.arrowFn(); // Output: undefined
+
+// arguments Object
+function showArgs() {
+  console.log(arguments);
+}
+showArgs(1, 2); // Output: [1, 2]
+const showArgs1 = () => {
+  console.log(arguments); // ReferenceError
+};
+showArgs1(1, 2, 3);
+
+// Constructor Usage
+function Person(name) {
+  this.name = name;
+}
+const p = new Person("Kayamuddin");
+const Person1 = (name) => {
+  this.name = name;
+};
+const p1 = new Person1("Kayamuddin"); // TypeError: Person1 is not a constructor
+
+// Explicit Return
+function square(n) {
+  return n * n;
+}
+// Implicit Return : Arrow Functions can return values implicitly if there's no {} block:
+const square = n => n * n; // Implicit return
