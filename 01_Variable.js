@@ -56,9 +56,9 @@ var c = "Var"
 var c = "Re-Var" // Allow Re-declare in everywhere
 */
 
-/* 4.Global Object Property(Window)
+/* 4.Global Object Property(Window)  // run on browser
 let a = 1
 console.log(window.a); //undefined
 var b = 2
-console.log(window.b); //1
+console.log(window.b); //2
 */
