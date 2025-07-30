@@ -232,3 +232,25 @@ const square = (x) => x * x;
 const double = (x) => x * 2;
 const doubleThenSquare = compose(square, double);
 console.log(doubleThenSquare(3)); // 36
+
+// Generator function
+function* countToThree() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+const counter = countToThree();
+console.log(counter.next()); // { value: 1, done: false }
+console.log(counter.next()); // { value: 2, done: false }
+console.log(counter.next()); // { value: 3, done: false }
+console.log(counter.next()); // { value: undefined, done: true }
+/*
+| Concept      | Description                                              |
+| ------------ | -------------------------------------------------------- |
+| `function*`  | Declares a generator function                            |
+| `yield`      | Pauses the function and returns a value                  |
+| `.next()`    | Resumes execution from the last `yield`                  |
+| `done`       | Boolean that tells whether the generator is finished     |
+| `value`      | The current yielded value                                |
+| **Iterable** | Generators are iterable, can be used in `for...of` loops |
+*/
