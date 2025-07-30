@@ -46,42 +46,6 @@ switch (fruit) {
     console.log("Unknown fruit");
 }
 
-
-
-
-// 🔁 Loops
-// For Loop: Used to repeat code a known number of times
-for (let i = 1; i <= 5; i++) {
-  console.log("Count:", i);
-}
-
-// While Loop: Repeats as long as a condition is true
-let i = 0;
-while (i < 3) {
-  console.log("i is", i);
-  i++;
-}
-
-// Do...While Loop: Executes at least once, then checks condition.
-let j = 0;
-do {
-  console.log("j is", j);
-  j++;
-} while (j < 3);
-
-// 🔁 Loop Control Statements
-// break: Exits the loop entirely.
-for (let i = 0; i < 5; i++) {             // Output: 0
-  if (i === 3) break;                                1
-  console.log(i);                                    2
-}
-
-// continue: Skips the current loop iteration.
-for (let i = 0; i < 5; i++) {            // Output: 0
-  if (i === 2) continue;                            1
-  console.log(i);                                   3 
-}                                                   4
-
 // 🔁 Try...Catch (Error Control Flow): Used for handling exceptions and errors.
 try {
   console.log("try Block");
