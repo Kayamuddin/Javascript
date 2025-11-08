@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+    <style>
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>Guess the Number</h1>
+        <h1>Between 1 to 10</h1>
+        <input type="number" id="number" placeholder="Enter a Number.">
+        <div>
+            <input type="button" value="Guess Number" id="GuessFunction">
+            <input type="button" value="Restart Game" id="restart">
+        </div>
+        <div>
+            <div id="yourGuess"></div>
+            <div id="GuessLeft">Guess Left: ❤️❤️❤️</div>
+        </div>
+        <div id="GuessIs"></div>
+    </div>
+
+    <script>
+        const GuessFunction = document.querySelector("#GuessFunction");
+        const restart = document.querySelector("#restart");
+        const yourGuessD = document.querySelector("#yourGuess");
+        const guessLeftD = document.querySelector("#GuessLeft");
+        const GuessIsD = document.querySelector("#GuessIs");
+        let number = Math.trunc(Math.random() * 10 + 1);   // 1 to 10 random number
+        let guessLeft = 3;
+        let guessList = [];
+        GuessFunction.addEventListener('click', function () {
+            var GuessNumber = Number(document.querySelector("#number").value);   // get number value on click
+
+            if (GuessNumber != number) {
+                guessLeft = guessLeft - 1;
+            }
+
+            if (guessLeft == 2) {
+                guessLeftD.innerText = "Guess Left: ❤️❤️";
+            } else if (guessLeft == 1) {
+                guessLeftD.innerText = "Guess Left: ❤️";
+            } else if (guessLeft == 0) {
+                guessLeftD.innerText = "Guess Left: ";
+            }
+
+            if (GuessNumber > number) {
+                GuessIsD.innerText = "Too High!";
+            } else if (GuessNumber < number) {
+                GuessIsD.innerText = "Too Low!";
+            } else {
+                GuessIsD.innerText = "🎉 You guessed it right!";
+                GuessFunction.style.display = "none";
+            }
+
+            if (guessLeft == 0) {
+                GuessFunction.style.display = "none";
+                GuessIsD.innerText = "You Lost! the Number is " + number;
+            }
+
+            guessList.push(GuessNumber);
+            yourGuessD.innerText = 'You Guessed: ' + guessList.join(', ');
+            document.querySelector("#number").value = '';  // Remove Input value & Show Placeholder
+        });
+
+        restart.addEventListener('click', () => {
+            document.querySelector("#number").value = '';  // Remove Input value & Show Placeholder
+            document.querySelector("#number").focus();  // Focus on Input
+            number = Math.trunc(Math.random() * 10 + 1);
+            GuessFunction.style.display = "inline-block";
+            yourGuessD.innerText = "";
+            guessList = [];
+            guessLeftD.innerText = "Guess Left: ❤️❤️❤️";
+            guessLeft = 3;
+            GuessIsD.innerText = '';
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Charger</title>
+    <style>
+        body {
+            position: relative;
+            height: 100vh;
+        }
+
+        .center {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        .colors {
+            border: 3px solid black;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            border-radius: 15px;
+        }
+
+        .button {
+            border: 2px solid black;
+            height: 5rem;
+            width: 5rem;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <div class="colors">
+            <div class="button" id="red" style="background-color:red;"></div>
+            <div class="button" id="green" style="background-color:green;"></div>
+            <div class="button" id="blue" style="background-color:blue;"></div>
+            <div class="button" id="gray" style="background-color:gray;"></div>
+        </div>
+        <center>
+            <h2>Tap a colour to change background colour</h2>
+        </center>
+    </div>
+
+    <script>
+        const colors = document.querySelectorAll('.button');
+        const body = document.querySelector('body');
+        colors.forEach(function (color) {
+            color.addEventListener('click', function () {
+                document.querySelector('body').style.backgroundColor = color.style.backgroundColor;
+            })
+        })
+    </script>
+</body>
+
+</html>
