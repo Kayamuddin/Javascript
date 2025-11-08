@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Events</title>
+    <style>
+        .mainZoo {
+            display: flex;
+            gap: 45px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="zoo" class="mainZoo">
+        <button id="lion" class="zooEle">Lion</button>
+        <button id="tiger" class="zooEle">Tiger</button>
+        <button id="owl" class="zooEle">Owl</button>
+        <button id="eagle" class="zooEle">Eagle</button>
+        <button id="horse" class="zooEle">Horse</button>
+    </div>
+    <ul id="links">
+        <li><a href="https://google.com" id="google">Google</a></li>
+        <li><a href="https://amazon.com" id="amazon">Amazon</a></li>
+    </ul>
+    <input type="text" id="input">
+    <div id="div1"></div>
+    <script>
+        const lion = document.querySelector("#lion");
+        const tiger = document.querySelector("#tiger");
+        const owl = document.querySelector("#owl");
+        const eagle = document.querySelector("#eagle");
+        const horse = document.querySelector("#horse");
+        const display = document.querySelector("#div1");
+        const input = document.querySelector("#input");
+        const zoo = document.querySelector("#zoo");
+        const zooAll = document.querySelectorAll("#zoo");
+
+        // attachEvent()
+        // jQuery - on
+
+        // e - PointerEvent.
+
+        // horse.onclick = function(){
+        //     alert("horse clicked")
+        // }
+
+        // https://chatgpt.com/s/t_690b1d6b6f188191bc650995e7e4f0bb
+
+        horse.addEventListener("click", function (e) {
+            console.log('clicked');
+        }, false);
+
+        // true , false in events
+
+        // Mouse Events
+        // click - when mouse down and up.
+        // mousedown - when mouse is on down or click or drag.
+        // mouseup - when mouse is on up after down.
+        // mousemove - when mouse move inside element.
+        // mouseover - when mouse go inside element.
+        // mouseout - when mouse go outside element.
+        // e.g on hover it do mouseover and mouseout.
+
+        // Touch Event(For Touch devices) - touchstart, touchmove, touchend.
+
+        // In Key Event first click in element.
+        // keydown - same as mousedown with key.
+        // keyup - same as mouseup with key.
+        // keypress - same as click with key.
+
+        // mostly used for inputs.
+        // focus - on focus it come just after the mousedown.
+        // blur - on unfocus it come just after the mousedown.
+        // use blur to hide menu of web page.
+
+        // Form - submit, change, focus, blur, input (on value change).
+        // Clipboard - copy, cut, paste.
+        // Window - load, resize, scroll, unload, DOMContentLoaded(web html load). used on (window).
+        // Drag & drop - drag, dragstart, dragend, dragover, drop, draggable="true"(In Element).
+        // Audio & Video - play, pause, ended, volumechange, timeupdate.
+
+        /*
+        | **Category**                     | **Example Events**                                                                                                           |
+        | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+        | 🖱️ **Mouse Events**             | `click`, `dblclick`, `mousedown`, `mouseup`, `mousemove`, `mouseover`, `mouseout`, `mouseenter`, `mouseleave`, `contextmenu` |
+        | ⌨️ **Keyboard Events**           | `keydown`, `keyup`, `keypress` *(deprecated)*                                                                                |
+        | 🧾 **Form Events**               | `submit`, `change`, `input`, `focus`, `blur`, `reset`, `select`                                                              |
+        | 🌐 **Window / Document Events**  | `load`, `unload`, `resize`, `scroll`, `error`, `beforeunload`, `DOMContentLoaded`                                            |
+        | 📋 **Clipboard Events**          | `copy`, `cut`, `paste`                                                                                                       |
+        | 🪄 **Drag & Drop Events**        | `drag`, `dragstart`, `dragend`, `dragover`, `dragenter`, `dragleave`, `drop`                                                 |
+        | 🎵 **Media Events**              | `play`, `pause`, `ended`, `volumechange`, `timeupdate`, `seeking`, `seeked`, `canplay`, `waiting`, `loadeddata`              |
+        | 📱 **Touch Events (Mobile)**     | `touchstart`, `touchmove`, `touchend`, `touchcancel`                                                                         |
+        | 👁️ **Focus Events**             | `focus`, `blur`, `focusin`, `focusout`                                                                                       |
+        | 💫 **Animation Events**          | `animationstart`, `animationend`, `animationiteration`                                                                       |
+        | 🎨 **Transition Events (CSS)**   | `transitionstart`, `transitionend`, `transitioncancel`, `transitionrun`                                                      |
+        | 🖐️ **Pointer Events**           | `pointerdown`, `pointerup`, `pointermove`, `pointerenter`, `pointerleave`, `pointercancel`                                   |
+        | 🌀 **Wheel Events**              | `wheel`                                                                                                                      |
+        | 📡 **Progress / Network Events** | `loadstart`, `progress`, `abort`, `error`, `load`, `loadend`, `online`, `offline`                                            |
+        | 💾 **Storage Events**            | `storage`                                                                                                                    |
+        | ⚙️ **Miscellaneous Events**      | `contextmenu`, `hashchange`, `popstate`, `message`, `visibilitychange`                                                       |
+        */
+
+        // element.addEventListener(eventType, function, useCapture);
+
+        // Event Bubbling(false) and Capturing(true).
+        // false (default) - The event is handled in the bubbling phase — it starts from the target element and moves upward to the parent elements.
+        // true - The event is handled in the capturing phase — it starts from the outermost element and moves downward to the target.
+        /*
+        zoo.addEventListener('click', () => {
+            console.log("Zoo Clicked");
+        }, false)
+        horse.addEventListener('click', () => {
+            console.log("Horse Clicked");
+        }, false)
+        // On Horse Click (On True it reverse)
+        // Horse Clicked
+        // Zoo Clicked
+        // false → bubbling: runs last (inner → outer)
+        // true → capturing: runs first (outer → inner). it come even before normal click.
+
+        // e.stopPropagation(); it does not allow outer element click on it.
+        zoo.addEventListener('click', () => {
+            console.log("Zoo Clicked");
+        }, false)
+        horse.addEventListener('click', (e) => {
+            console.log("Horse Clicked");
+            e.stopPropagation();
+        }, false)
+        // On Horse Click
+        // Horse Clicked
+
+        // e.preventDefault() - remove the default event of element.
+        document.getElementById('google').addEventListener('click', function (e) {
+            // default it will href to links on click
+            e.preventDefault();
+            console.log("google clicked");
+        }, false);
+
+        // Remove Element on Click using target.
+        // target - send the whole element.
+        // <ul id="links">
+        //     <li><a href="https://google.com" id="google">Google</a></li>
+        //     <li><a href="https://amazon.com" id="amazon">Amazon</a></li>
+        // </ul>
+        document.querySelector('#links').addEventListener('click', (e) => {
+            console.log(e.target.tagName);
+            if (e.target.tagName === 'A') {
+                console.log(e.target.id);
+                let removeIt = e.target.parentNode;
+                removeIt.remove();
+            }
+        })*/
+        // removeIt.parentNode.removeChild(removeIt)
+
+        // preventDefault(), stopPropagation(), 
+        // type, timestamp, defaultPrevented,
+        // target, toElement, srcElement, currentTarget,
+        // clientX, clientY, screenX, screenY,
+        // altkey, ctrlkey, shiftkey, keyCodes
+
+        // e.target.tagName - return Tag Name in CAPS.
+        // e.target.id - return id of clicked Element.
+        // e.target.className - return class of clicked Element.
+        // e.target.parentNode - return parent element Object.
+        // e.target.childNodes - return child element Object.
+
+        // | Property          | Meaning                                  | When Used               | Modern / Old |
+        // | ----------------- | ---------------------------------------- | ----------------------- | ------------ |
+        // | **target**        | Element that triggered the event         | All events              | ✅ Modern     |
+        // | **currentTarget** | Element that currently handles the event | All events              | ✅ Modern     |
+        // | **srcElement**    | Same as `target` (IE only)               | All events              | ⚠️ Old       |
+        // | **toElement**     | Mouse moved **to** this element          | `mouseout`, `mouseover` | ⚠️ Old/IE    |
+
+        // Modern browsers use `target` instead of `srcElement` 
+        // because `target` is the **official standard** property defined by the **W3C (World Wide Web Consortium)** for all browsers, 
+        // while `srcElement` was created only for **old Internet Explorer**. 
+        // So, to follow one common rule for all browsers, modern ones use `target`.
+        // console.log(e.target === e.srcElement); // true
+
+        // e.clientX - Relative to the browser’s viewport X Position in value of px.
+        // e.clientY - Relative to the browser’s viewport Y Position in value of px.
+        // e.screenX - return px values in X direction of Entire Device Screen.
+        // e.screenY - return px values in Y direction of Entire Device Screen.
+
+        // | Property     | Type    | Description                              | Example      | Modern/Old    |
+        // | ------------ | ------- | ---------------------------------------- | ------------ | ------------- |
+        // | **altKey**   | Boolean | True if **Alt** is pressed               | `e.altKey`   | ✅ Modern      |
+        // | **ctrlKey**  | Boolean | True if **Ctrl** is pressed              | `e.ctrlKey`  | ✅ Modern      |
+        // | **shiftKey** | Boolean | True if **Shift** is pressed             | `e.shiftKey` | ✅ Modern      |
+        // | **key**      | String  | Returns the **actual key value** pressed | `e.key`      | ✅ Modern      |
+        // | **keyCode**  | Number  | Numeric value of key pressed             | `e.keyCode`  | ⚠️ Deprecated |
+
+        // e.key - Alt, Control, Shift, ArrowUp, CapsLock, 
+        // Tab, Escape, Meta(window), Backspace, F2.
+
+        document.addEventListener("keydown", (e) => {
+            console.log(`Key: ${e.key}, Code: ${e.keyCode}`);
+            console.log(`Alt: ${e.altKey}, Ctrl: ${e.ctrlKey}, Shift: ${e.shiftKey}`);
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === "c") {
+                console.log("Ctrl + C pressed!");
+            }
+        });
+
+        zoo.addEventListener('click', (e) => {
+            console.log(e);  // return PointerEvent{}
+        });
+
+        zoo.addEventListener("click", (e) => {
+            // Clone clicked div
+            const clone = e.target.cloneNode(true);
+            clone.style.backgroundColor = "lightgreen"; // change color to show it’s cloned
+            // Insert clone at top of target div
+            display.insertBefore(clone, display.firstChild);
+        });
+    </script>
+</body>
+
+</html>
