@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web APIs</title>
+</head>
+
+<body>
+    <h1>Advance Javascript</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    const changeText = function () {
+        document.querySelector('h1').innerHTML = "best JS series";
+    }
+    const changeMe = setTimeout(changeText, 2000);
+    // setTimeout() - run only one time after ms.
+    // clearTimeout() - stop the setTimeout() before the ms.
+
+    function clockTime(prm) {
+        let date = new Date();
+        console.log(prm + date.toLocaleTimeString());
+    }
+    const stopClock = setInterval(clockTime, 1000, "Hii at ");
+    // setInterval() - run continuously after each ms.
+    // clearInterval() - stop setInterval() continuously run.
+
+    document.querySelector('#stop').addEventListener('click', function () {
+        clearTimeout(changeMe);
+        clearInterval(stopClock);
+        console.log("STOPPED");
+    })
+
+</script>
+
+</html>
