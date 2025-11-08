@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+</head>
+
+<body>
+    <h1 id="idName" class="className">Hello World <span style="display: none;">test</span></h1>
+    <div class="parent">
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+        <input type="password">
+    </div>
+    <form id="loginForm"></form>
+    <form name="registerForm"></form>
+    <!---<img id="logo" src="logo.png">--->
+
+    <script>
+        document.getElementById('idName').id;  // idName
+        document.getElementById('idName').className;   // className
+        // document.getElementsByClassName('className').getAttribute('id'); // TypeError  it an HtmlCollection
+        document.getElementsByClassName('className')[0].getAttribute('id'); // idName
+        document.querySelector('.className').getAttribute('id');  // idName  by default is select first one
+        document.getElementById('idName').getAttribute('class'); // className
+        document.getElementById('idName').setAttribute('class', 'test'); // <h1 id="idName" class="test">Hello World</h1>
+        document.getElementById('idName').setAttribute('class', 'className test'); // <h1 id="idName" class="className test">Hello World</h1>
+        document.querySelector('input[type="password"]');  // <input type="password">
+
+        const element = document.getElementById('idName');
+
+        element.innerText;  // Hello World
+        element.textContent;  // Hello World test
+        element.innerHTML;  // Hello World <span style="display: none;">test</span>
+
+        // element.innerText = "new text";
+        // element.textContent = "New text";   // Change Content
+        // element.innerHTML = "<strong>Bold text</strong>";
+
+        element.setAttribute("src", "image.jpg");  // Change Attributes
+        element.id = "newId";
+
+        element.style.color = "red";        // Change Styles
+        element.style.fontSize = "20px";
+
+        // create an element
+        const parent = document.querySelector('.parent');
+        console.log(parent.children);
+
+        // https://chatgpt.com/s/t_68da99416bf88191a5bc41f5df756197
+
+        /* HTMLCollection
+        | Property/Method          | Returns                      | Notes |
+        | ------------------------ | ---------------------------- | ----- |
+        | `getElementsByTagName`   | Elements with given tag      | Live  |
+        | `getElementsByClassName` | Elements with given class    | Live  |
+        | `document.forms`         | All `<form>`                 | Live  |
+        | `document.images`        | All `<img>`                  | Live  |
+        | `document.links`         | All `<a>/<area>` with `href` | Live  |
+        | `document.anchors`       | All `<a>` with `name`        | Live  |
+        | `document.scripts`       | All `<script>`               | Live  |
+        | `element.children`       | All child elements           | Live  |
+        All of these collections are live → they update automatically if DOM changes.
+        They are array-like, but not real arrays.
+        Access elements by index (collection[0]) or by name/id (if available).
+        ✅ Properties
+        length → Number of elements in the collection.
+        ✅ Methods
+        item(index) → Returns the element at the given index (or null).
+        namedItem(name) → Returns the element with a given id or name attribute.
+        ✅ Indexed & Named Access
+        You can also access items by:
+        Index: collection[0]
+        Name/ID: collection["myForm"]
+        ✅ Inherited from Object.prototype
+        (e.g., toString(), hasOwnProperty(), etc.)
+    
+        // ProtoType
+        const divs = document.getElementsByTagName("div");
+        console.log(divs.length); // e.g. 10
+        divs.item(1);
+             // namedItem(name)
+        // <form id="loginForm"></form>
+        // <form name="registerForm"></form>
+        const forms = document.forms;
+        console.log(forms.namedItem("loginForm"));    // <form id="loginForm">
+        console.log(forms.namedItem("registerForm")); // <form name="registerForm">
+            // Indexed Access
+        const imgs = document.images;
+        console.log(imgs[0]); // first <img>
+            // Named Access
+        const imgs1 = document.images;
+        console.log(imgs1["logo"]); // <img id="logo" src="logo.png">
+        */
+
+        /* NodeList
+        | Property/Method              | Returns                                    | Live or Static |
+        | ---------------------------- | ------------------------------------------ | -------------- |
+        | `node.childNodes`            | All child nodes (elements, text, comments) | Live           |
+        | `document.querySelectorAll`  | Matching elements by CSS selector          | Static         |
+        | `document.getElementsByName` | Elements with matching `name` attribute    | Live           |
+        | `document.evaluate` (XPath)  | NodeList-like result                       | Depends        |
+        NodeList can be:
+        Live → updates with DOM (childNodes, getElementsByName).
+        Static → does not update (querySelectorAll).
+        NodeList can contain any node type:
+        Elements (<div>, <p>, etc.)
+        Text nodes (spaces, line breaks)
+        Comment nodes (html comment)
+        ✅ Properties
+        length → Number of nodes in the list.
+        ✅ Methods
+        item(index) → Returns the node at the given index (or null).
+        forEach(callback[, thisArg]) → Loops over nodes like an array.
+        keys() → Returns an iterator of indices.
+        values() → Returns an iterator of nodes.
+        entries() → Returns an iterator of [index, node] pairs.
+        [Symbol.iterator]() → Allows for...of loops.
+        ✅ Inherited from Object.prototype
+        (e.g., toString(), hasOwnProperty(), etc.) – but not usually used with NodeLists.
+        
+        // Prototype
+        const node = document.querySelectorAll(".day");
+        node.length;  // 4
+        node.item(1);  // <div class="day">Tuesday</div>
+        node.forEach(day => {
+            day.style.color = "red"; // color all links red
+        });
+        for (const index of node.keys()) {  // Index: 0
+            console.log("Index:", index);   // Index: 1
+        }                                   // Index: 2
+                                            // Index: 3
+        for (const val of node.values()) {  // <div class="day">Monday</div>
+            console.log(val);               // <div class="day">Tuesday</div>
+        }                                   // <div class="day">Wednesday</div>
+                                            // <div class="day">Thursday</div>
+        const inputs = document.querySelectorAll("input");
+        for (const [i, input] of inputs.entries()) {  // [index, node]
+            console.log(`Input ${i}: type=${input.type}`);
+        }
+        const buttons = document.querySelectorAll("button");
+        for (const btn of buttons) {
+            btn.addEventListener("click", () => alert("Clicked!"));
+        }
+        */
+
+        /*
+        NamedNodeMap
+        Older interface (rarely used directly now).
+        Represents attributes of an element.
+        <p id="demo" class="text"></p>
+        let attrs = document.getElementById("demo").attributes;
+        console.log(attrs); // NamedNodeMap
+        console.log(attrs[0].name);  // id
+        console.log(attrs[0].value); // demo
+        */
+
+        /*
+        | Feature        | NodeList                                                                      | HTMLCollection                                           |
+        | -------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------- |
+        | Can contain    | Any node (elements, text, comments)                                           | Elements only                                            |
+        | Live or static | Can be **live** (`childNodes`) or **static** (`querySelectorAll`)             | Always **live**                                          |
+        | Methods        | `item()`, `forEach()`, `keys()`, `values()`, `entries()`, `[Symbol.iterator]` | `item()`, `namedItem()`                                  |
+        | Iteration      | Directly iterable (`forEach`, `for...of`)                                     | Not directly iterable (must convert with `Array.from()`) |
+        */
+
+        /*
+        | Method                            | Description        | Returns        |
+        | --------------------------------- | ------------------ | -------------- |
+        | `getElementById("id")`            | Select by ID       | Single element |
+        | `getElementsByClassName("class")` | Select by class    | HTMLCollection |
+        | `getElementsByTagName("tag")`     | Select by tag name | HTMLCollection |
+        | `querySelector("cssSelector")`    | First match        | Single element |
+        | `querySelectorAll("cssSelector")` | All matches        | NodeList       |
+        */
+
+    </script>
+</body>
+
+</html>

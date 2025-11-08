@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+    <div id="display"></div>
+    <script>
+        const days = document.querySelector(".parent");
+        const display = document.querySelector("#display");
+        days[1];  // undefined
+        days.children;  // HTMLCollection(4)
+        days.children[1];  // <div class="day">Tuesday</div>
+        const dayy = days.children;
+        dayy[2]  // <div class="day">Wednesday</div>
+
+        days.firstElementChild;  // <div class="day">Monday</div>
+        days.lastElementChild;  // <div class="day">Thursday</div>
+        document.querySelector("days:nth-child(3)")  // <div class="day">Wednesday</div>
+
+        const dayOne = document.querySelector(".day");  // <div class="day">Monday</div>
+        dayOne.parentElement; // <div class="parent">...</div>
+        dayOne.nextElementSibling; // <div class="day">Tuesday</div>
+
+        dayOne.previousElementSibling; // null
+
+        days.childNodes; // NodeList(9) enter(text),div,enter(text),div,..
+
+
+
+        // Create New Element
+        const div = document.createElement('div');
+        div.className = "main";
+        div.id = Math.round(Math.random() * 10 + 1);
+        div.setAttribute("id", "mainID");
+        div.style.backgroundColor = "green";
+        div.style.padding = "12px";
+        // div.innerText = "Hello World";  // its override the old content
+        const addText = document.createTextNode("Hello World");
+        div.appendChild(addText);
+
+        document.body.appendChild(div);
+
+        // Clone
+        days.addEventListener("click", (e) => {
+            // Clone clicked div
+            const clone = e.target.cloneNode(true);
+            clone.style.backgroundColor = "lightgreen"; // change color to show it’s cloned
+            // Insert clone at top of target div
+            display.insertBefore(clone, display.firstChild);
+        });
+    </script>
+
+
+    <ul class="language">
+        <li>HTML</li>
+    </ul>
+    <script>
+        function addLanguage(language) {
+            const li = document.createElement('li');
+            li.innerHTML = `${language}`;
+            document.querySelector(".language").appendChild(li);
+        }
+        addLanguage("CSS");
+
+        function addLanguage1(language) {  // Best
+            const li = document.createElement('li');
+            li.appendChild(document.createTextNode(language));
+            document.querySelector(".language").appendChild(li);
+        }
+        addLanguage1("Javascript");
+        addLanguage1("Express Js");
+
+        // Edit
+        const secondLang = document.querySelector('li:nth-child(2)');
+        // secondLang.innerHTML="Tailwind CSS";
+
+        const newli = document.createElement('li');
+        newli.textContent = "Tailwind CSS";
+        secondLang.replaceWith(newli);
+
+        const firstLang = document.querySelector('li:first-child');
+        firstLang.outerHTML = '<li>React Js</li>';
+
+        // Remove
+        const lastLang = document.querySelector('li:last-child');
+        lastLang.remove();
+        // lastLang.parentNode.removeChild(lastLang);
+    </script>
+</body>
+
+</html>
